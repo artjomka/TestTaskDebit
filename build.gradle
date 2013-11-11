@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+mainClassName = "lv.testtask.Main"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def slf4jVersion = '1.7.5';
+    def jettyVersion = '9.0.2.v20130417';
+    def springVersion = '3.2.4.RELEASE';
+
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.eclipse.jetty:jetty-server:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-webapp:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-servlet:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-servlets:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-jsp:${jettyVersion}"
+    compile 'javax.servlet:jstl:1.2'
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "org.springframework:spring-test:${springVersion}"
+    compile 'junit:junit:4.11'
+
+    runtime 'ch.qos.logback:logback-classic:1.0.11'
+    runtime 'ch.qos.logback:logback-core:1.0.11'
+    runtime "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+    runtime "org.slf4j:jul-to-slf4j:${slf4jVersion}"
+}
