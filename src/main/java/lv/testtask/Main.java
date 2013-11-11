@@ -8,5 +8,6 @@ public class Main {
 
         EmbeddedJetty embeddedJetty = new EmbeddedJetty();
         embeddedJetty.startServer();
+        embeddedJetty.join();
     }
 }

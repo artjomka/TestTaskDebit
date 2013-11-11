@@ -50,4 +50,12 @@ public final class EmbeddedJetty {
         handler.setContextPath("/");
         return handler;
     }
+
+    public void join(){
+        try {
+            jettyServer.join();
+        } catch (InterruptedException e) {
+            LOGGER.error("Failed to start embedded server", e);
+        }
+    }
 }
