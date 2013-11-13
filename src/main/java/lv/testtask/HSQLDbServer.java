@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.SmartLifecycle;
 
 import java.io.IOException;
-import java.util.Properties;
 
 public class HSQLDbServer implements SmartLifecycle {
 
@@ -17,8 +16,8 @@ public class HSQLDbServer implements SmartLifecycle {
     private Server server;
     private boolean running = false;
 
-    public HSQLDbServer(Properties props) {
-        properties = new HsqlProperties(props);
+    public HSQLDbServer(HsqlProperties properties) {
+        this.properties = properties;
     }
 
     @Override

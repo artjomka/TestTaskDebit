@@ -1,10 +1,21 @@
 package lv.testtask.config;
 
-import org.springframework.context.annotation.ComponentScan;
+import lv.testtask.HSQLDbServer;
+import org.hsqldb.persist.HsqlProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 
 @Configuration
-@ComponentScan(basePackages = "lv.testtask.config", excludeFilters = @ComponentScan.Filter(value = MvcConfig.class, type = FilterType.CUSTOM))
 public class AppConfig {
+
+
+    @Bean(initMethod = "start")
+    public HSQLDbServer hsqldb(){
+        HsqlProperties properties = new HsqlProperties();
+        properties.setProperty("server.database.0", "d:/temp/taskbase");
+        properties.setProperty("server.dbname.0", "taskbase");
+        properties.setProperty("server.remote_open", "taskbase");
+        HSQLDbServer hsqldb = new HSQLDbServer(properties);
+        return  hsqldb;
+    }
 }
