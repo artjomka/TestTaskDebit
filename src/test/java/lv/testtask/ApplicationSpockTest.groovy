@@ -18,8 +18,15 @@ class ApplicationSpockTest extends Specification {
     @Autowired
     private AbstractApplicationContext ctx
 
+    @Autowired
+    private
+
     def "check context not null"() {
         expect:
         ctx != null
+    }
+
+    def "check hazelcast server initialized"() {
+
     }
 }

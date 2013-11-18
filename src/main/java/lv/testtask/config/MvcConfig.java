@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "lv.testtask.config")
+@ComponentScan(basePackages = "lv.testtask")
 public class MvcConfig extends WebMvcConfigurationSupport {
 
     @Override
