@@ -18,7 +18,7 @@ import java.util.Properties;
 
 @Profile("production")
 @Configuration
-@PropertySource(value = {"classpath:/hibernate.cfg.properties", "classpath:/datasource.properties"})
+@PropertySource(value = {"classpath:/hibernate.properties", "classpath:/datasource.properties"})
 @EnableTransactionManagement
 public class SessionFactoryConfig {
 
@@ -29,7 +29,7 @@ public class SessionFactoryConfig {
     @Bean
     public LocalSessionFactoryBean sessionFactoryBean() throws PropertyVetoException {
         LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
-        factory.setPackagesToScan("lv.testtask.persistance.domain");
+        factory.setPackagesToScan("lv.testtask.persistence.domain");
         Properties properties = new Properties();
         hibernateProperties(properties);
 

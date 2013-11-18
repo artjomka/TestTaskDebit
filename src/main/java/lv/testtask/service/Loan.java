@@ -1,5 +1,7 @@
 package lv.testtask.service;
 
 
-public interface Debt {
+public interface Loan {
+
+
 }
