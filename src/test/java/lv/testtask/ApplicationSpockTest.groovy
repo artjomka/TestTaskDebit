@@ -9,6 +9,7 @@ import org.springframework.test.context.web.AnnotationConfigWebContextLoader
 import org.springframework.test.context.web.WebAppConfiguration
 import spock.lang.Specification
 
+
 @ContextConfiguration(classes =  [MvcConfig], loader = AnnotationConfigWebContextLoader.class)
 @ActiveProfiles("dev")
 @WebAppConfiguration
@@ -19,6 +20,6 @@ class ApplicationSpockTest extends Specification {
 
     def "check context not null"() {
         expect:
-        ctx = null
+        ctx != null
     }
 }
