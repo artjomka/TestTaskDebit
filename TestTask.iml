@@ -85,7 +85,6 @@
     <orderEntry type="library" exported="" name="spring-jdbc-3.2.4.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="hibernate-core-4.2.7.Final" level="project" />
     <orderEntry type="library" exported="" name="antlr-2.7.7" level="project" />
-    <orderEntry type="library" exported="" name="jboss-logging-3.1.0.GA" level="project" />
     <orderEntry type="library" exported="" name="dom4j-1.6.1" level="project" />
     <orderEntry type="library" exported="" name="javassist-3.18.1-GA" level="project" />
     <orderEntry type="library" exported="" name="jboss-transaction-api_1.1_spec-1.0.1.Final" level="project" />
@@ -102,6 +101,10 @@
     <orderEntry type="library" exported="" name="hibernate-entitymanager-4.2.1.Final" level="project" />
     <orderEntry type="library" exported="" name="usertype.spi-3.1.0.CR8" level="project" />
     <orderEntry type="library" exported="" name="junit-dep-4.10" level="project" />
+    <orderEntry type="library" exported="" name="hibernate-validator-5.0.1.Final" level="project" />
+    <orderEntry type="library" exported="" name="jboss-logging-3.1.1.GA" level="project" />
+    <orderEntry type="library" exported="" name="validation-api-1.1.0.Final" level="project" />
+    <orderEntry type="library" exported="" name="classmate-0.8.0" level="project" />
   </component>
 </module>
 

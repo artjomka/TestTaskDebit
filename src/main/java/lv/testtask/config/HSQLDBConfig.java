@@ -1,6 +1,6 @@
 package lv.testtask.config;
 
-import lv.testtask.HSQLDbServer;
+import lv.testtask.server.HSQLDbServer;
 import org.hsqldb.persist.HsqlProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

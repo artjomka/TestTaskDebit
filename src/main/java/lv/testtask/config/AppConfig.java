@@ -6,9 +6,7 @@ import com.hazelcast.config.Config;
 import com.hazelcast.config.GroupConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IMap;
 import lv.testtask.gson.converter.DateTimeConverter;
-import lv.testtask.repository.InMemoryIPUserData;
 import org.joda.time.DateTime;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,8 +32,4 @@ public class AppConfig {
     }
 
 
-    @Bean
-    public IMap<String, InMemoryIPUserData> ipDataMap(){
-        return instance().getMap("ipDataMap");
-    }
 }

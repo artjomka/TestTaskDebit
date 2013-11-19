@@ -2,9 +2,11 @@ package lv.testtask.persistence.domain;
 
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Email;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -16,10 +18,14 @@ public class User {
     @Column(nullable = false, updatable = false, unique = true)
     private Integer id;
 
-    private String username;
+    @NotNull
+    private String phone;
 
+    @Email
+    @NotNull
     private String mail;
 
+    @NotNull
     private String password;
 
 
@@ -29,12 +35,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch =  FetchType.LAZY, orphanRemoval = true)
     private Set<Loan> loans;
 
-    public String getUsername() {
-        return username;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getMail() {
@@ -78,14 +84,14 @@ public class User {
         User user = (User) o;
 
         if (mail != null ? !mail.equals(user.mail) : user.mail != null) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = username != null ? username.hashCode() : 0;
+        int result = phone != null ? phone.hashCode() : 0;
         result = 31 * result + (mail != null ? mail.hashCode() : 0);
         return result;
     }
@@ -94,7 +100,7 @@ public class User {
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
         sb.append("id=").append(id);
-        sb.append(", username='").append(username).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
         sb.append(", mail='").append(mail).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", dateRegistered=").append(dateRegistered);

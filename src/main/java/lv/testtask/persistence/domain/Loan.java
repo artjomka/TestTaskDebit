@@ -7,6 +7,7 @@ import org.joda.money.Money;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -17,15 +18,19 @@ public class Loan {
     @GeneratedValue
     private Integer id;
 
+    @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime taken;
 
+    @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime returnTill;
 
+    @NotNull
     @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount", parameters = {@Parameter(name="currencyCode", value="EUR") })
     private Money amount;
 
+    @NotNull
     @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount", parameters = {@Parameter(name="currencyCode", value="EUR") })
     private Money interest;
 

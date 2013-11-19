@@ -1,4 +1,4 @@
-package lv.testtask;
+package lv.testtask.server;
 
 import org.hsqldb.Server;
 import org.hsqldb.persist.HsqlProperties;
