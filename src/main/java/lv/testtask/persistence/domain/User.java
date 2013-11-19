@@ -13,6 +13,7 @@ public class User {
 
     @Id
     @GeneratedValue
+    @Column(nullable = false, updatable = false, unique = true)
     private Integer id;
 
     private String username;
@@ -21,22 +22,12 @@ public class User {
 
     private String password;
 
-    private Integer attemptTimes;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime dateRegistered;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch =  FetchType.LAZY, orphanRemoval = true)
     private Set<Loan> loans;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -62,13 +53,6 @@ public class User {
         this.password = password;
     }
 
-    public Integer getAttemptTimes() {
-        return attemptTimes;
-    }
-
-    public void setAttemptTimes(Integer attemptTimes) {
-        this.attemptTimes = attemptTimes;
-    }
 
     public DateTime getDateRegistered() {
         return dateRegistered;
@@ -113,7 +97,6 @@ public class User {
         sb.append(", username='").append(username).append('\'');
         sb.append(", mail='").append(mail).append('\'');
         sb.append(", password='").append(password).append('\'');
-        sb.append(", attemptTimes=").append(attemptTimes);
         sb.append(", dateRegistered=").append(dateRegistered);
         sb.append(", loans=").append(loans);
         sb.append('}');

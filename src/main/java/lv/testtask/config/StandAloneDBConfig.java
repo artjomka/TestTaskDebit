@@ -1,17 +1,21 @@
 package lv.testtask.config;
 
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
 @Profile("dev")
 public class StandAloneDBConfig {
 
@@ -26,6 +30,17 @@ public class StandAloneDBConfig {
         factory.setDataSource(dataSource());
 
         return factory;
+    }
+
+    @Bean
+    public SessionFactory sessionFactory() throws PropertyVetoException {
+        return sessionFactoryBean().getObject();
+    }
+
+    @Bean
+    public HibernateTransactionManager transactionManager() throws PropertyVetoException {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory());
+        return transactionManager;
     }
 
     private void hibernateProperties(Properties properties) {

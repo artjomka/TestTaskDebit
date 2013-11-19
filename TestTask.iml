@@ -91,6 +91,17 @@
     <orderEntry type="library" exported="" name="jboss-transaction-api_1.1_spec-1.0.1.Final" level="project" />
     <orderEntry type="library" exported="" name="hibernate-jpa-2.0-api-1.0.1.Final" level="project" />
     <orderEntry type="library" exported="" name="hibernate-commons-annotations-4.0.2.Final" level="project" />
+    <orderEntry type="library" exported="" name="joda-time-2.3" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
+    <orderEntry type="library" exported="" name="usertype.core-3.1.0.CR8" level="project" />
+    <orderEntry type="library" exported="" name="joda-money-0.9" level="project" />
+    <orderEntry type="library" exported="" name="spock-core-0.7-groovy-2.0" level="project" />
+    <orderEntry type="library" exported="" name="spock-spring-0.7-groovy-2.0" level="project" />
+    <orderEntry type="library" exported="" name="groovy-all-2.2.0-rc-3" level="project" />
+    <orderEntry type="library" exported="" name="hazelcast-3.1.1" level="project" />
+    <orderEntry type="library" exported="" name="hibernate-entitymanager-4.2.1.Final" level="project" />
+    <orderEntry type="library" exported="" name="usertype.spi-3.1.0.CR8" level="project" />
+    <orderEntry type="library" exported="" name="junit-dep-4.10" level="project" />
   </component>
 </module>
 

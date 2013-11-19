@@ -45,9 +45,8 @@ public class SessionFactoryConfig {
 
     @Bean
     public SessionFactory sessionFactory() throws PropertyVetoException {
-        final SessionFactory sessionFactory = sessionFactoryBean().getObject();
 
-        return sessionFactory;
+        return sessionFactoryBean().getObject();
     }
 
     @Bean
