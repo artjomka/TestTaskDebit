@@ -1,7 +1,7 @@
 package lv.testtask.service;
 
 
-public interface Loan {
+public interface LoanService {
 
 
 }
