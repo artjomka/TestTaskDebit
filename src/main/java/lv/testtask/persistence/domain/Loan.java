@@ -1,5 +1,6 @@
 package lv.testtask.persistence.domain;
 
+import lv.testtask.validation.annotation.MidnightRule;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Parameter;
 import org.joda.money.CurrencyUnit;
@@ -7,11 +8,13 @@ import org.joda.money.Money;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
 @Table
+@MidnightRule
 public class Loan {
 
     @Id
@@ -22,6 +25,7 @@ public class Loan {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime taken;
 
+    @Future
     @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime returnTill;

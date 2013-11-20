@@ -11,6 +11,10 @@ import org.joda.time.DateTime;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 @Configuration
 public class AppConfig {
 
@@ -31,5 +35,15 @@ public class AppConfig {
         return instance;
     }
 
+
+    @Bean
+    public ValidatorFactory validatorFactory(){
+        return Validation.buildDefaultValidatorFactory();
+    }
+
+    @Bean
+    public Validator validator(){
+       return validatorFactory().getValidator();
+    }
 
 }

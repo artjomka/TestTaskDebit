@@ -9,14 +9,14 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.IOException;
 
-public class IpValidationData implements DataSerializable {
+public class IpRestrictionData implements DataSerializable {
     private  DateTime lastLoanTaken;
 
     @Max(value = 3)
     @Min(value = 0)
     private  Integer loansTakenInDay;
 
-    public IpValidationData() {
+    public IpRestrictionData() {
     }
 
 
@@ -31,7 +31,7 @@ public class IpValidationData implements DataSerializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("IpValidationData{");
+        final StringBuilder sb = new StringBuilder("IpRestrictionData{");
         sb.append("lastLoanTaken=").append(lastLoanTaken);
         sb.append(", loansTakenInDay=").append(loansTakenInDay);
         sb.append('}');

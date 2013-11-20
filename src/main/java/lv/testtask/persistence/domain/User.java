@@ -3,6 +3,7 @@ package lv.testtask.persistence.domain;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -18,17 +19,18 @@ public class User {
     @Column(nullable = false, updatable = false, unique = true)
     private Integer id;
 
-    @NotNull
+    @NotEmpty
     private String phone;
 
+    @NotEmpty
     @Email
-    @NotNull
     private String mail;
 
-    @NotNull
+    @NotEmpty
     private String password;
 
 
+    @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime dateRegistered;
 

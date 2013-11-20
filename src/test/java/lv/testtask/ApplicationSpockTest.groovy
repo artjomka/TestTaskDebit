@@ -1,7 +1,7 @@
 package lv.testtask
 import com.hazelcast.core.HazelcastInstance
 import lv.testtask.config.MvcConfig
-import lv.testtask.validation.IpValidationData
+import lv.testtask.validation.IpRestrictionData
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.support.AbstractApplicationContext
@@ -37,10 +37,10 @@ class ApplicationSpockTest extends Specification {
     def "store/retrieve value with hazelcast"() {
         def map = instance.getMap("loanData")
 
-        map.put("127.0.0.1", new IpValidationData(lastLoanTaken:new DateTime(2013,10,10,10,0), loansTakenInDay:1))
+        map.put("127.0.0.1", new IpRestrictionData(lastLoanTaken:new DateTime(2013,10,10,10,0), loansTakenInDay:1))
 
         when:
-        IpValidationData result = map.get("127.0.0.1")
+        IpRestrictionData result = map.get("127.0.0.1")
 
         then:
         result != null
