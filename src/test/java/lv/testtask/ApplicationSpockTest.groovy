@@ -37,7 +37,7 @@ class ApplicationSpockTest extends Specification {
     def "store/retrieve value with hazelcast"() {
         def map = instance.getMap("loanData")
 
-        map.put("127.0.0.1", new IpRestrictionData(lastLoanTaken:new DateTime(2013,10,10,10,0), loansTakenInDay:1))
+        map.put("127.0.0.1", new IpRestrictionData(lastLoanTaken:new DateTime(2013,10,10,10,0), loansTakenToday:1))
 
         when:
         IpRestrictionData result = map.get("127.0.0.1")
@@ -45,6 +45,6 @@ class ApplicationSpockTest extends Specification {
         then:
         result != null
         result.lastLoanTaken ==  new DateTime(2013,10,10,10,0)
-        result.loansTakenInDay == 1
+        result.loansTakenToday == 1
     }
 }

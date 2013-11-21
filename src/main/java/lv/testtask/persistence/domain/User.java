@@ -24,7 +24,7 @@ public class User {
 
     @NotEmpty
     @Email
-    private String mail;
+    private String email;
 
     @NotEmpty
     private String password;
@@ -45,12 +45,12 @@ public class User {
         this.phone = phone;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -85,7 +85,7 @@ public class User {
 
         User user = (User) o;
 
-        if (mail != null ? !mail.equals(user.mail) : user.mail != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
 
         return true;
@@ -94,7 +94,7 @@ public class User {
     @Override
     public int hashCode() {
         int result = phone != null ? phone.hashCode() : 0;
-        result = 31 * result + (mail != null ? mail.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 
@@ -103,7 +103,7 @@ public class User {
         final StringBuilder sb = new StringBuilder("User{");
         sb.append("id=").append(id);
         sb.append(", phone='").append(phone).append('\'');
-        sb.append(", mail='").append(mail).append('\'');
+        sb.append(", email='").append(email).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", dateRegistered=").append(dateRegistered);
         sb.append(", loans=").append(loans);

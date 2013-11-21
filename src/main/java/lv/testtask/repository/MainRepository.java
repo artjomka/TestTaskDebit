@@ -5,7 +5,7 @@ import lv.testtask.persistence.domain.User;
 
 import java.util.Set;
 
-public interface LoanRepository {
+public interface MainRepository {
 
     public void saveLoan(Loan loan);
 
@@ -16,4 +16,6 @@ public interface LoanRepository {
     public void saveUser(User user);
 
     public User getUserById(Integer userId);
+
+    public User getUserByPhoneAndMail(String phone, String email);
 }

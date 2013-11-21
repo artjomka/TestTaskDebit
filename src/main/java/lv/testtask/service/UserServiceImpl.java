@@ -1,39 +1,46 @@
 package lv.testtask.service;
 
 import com.google.gson.Gson;
-import lv.testtask.gson.ErrorData;
+import lv.testtask.gson.Result;
+import lv.testtask.gson.ResultStatus;
 import lv.testtask.persistence.domain.User;
+import lv.testtask.repository.MainRepository;
+import lv.testtask.service.util.ValidationHelper;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.Collections;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 
     @Autowired
     private Gson gson;
-
+    @Qualifier("mainRepositoryImpl")
     @Autowired
-    private Validator validator;
+    private MainRepository mainRepository;
+
+    @Qualifier("validationHelper")
+    @Autowired
+    private ValidationHelper validationHelper;
 
 
     @Override
     public String registerUser(String jsonUser) {
         final User user = gson.fromJson(jsonUser, User.class);
-        final Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
+        user.setDateRegistered(DateTime.now());
+        final Result userValidationResult = validationHelper.getValidationResult(user);
+        if (userValidationResult.hasErrors()) {
+            return gson.toJson(userValidationResult);
 
-        if (!constraintViolations.isEmpty()) {
-            List<ErrorData> errorMessages = new ArrayList<ErrorData>();
-            for (ConstraintViolation<User> constraintViolation : constraintViolations) {
-                errorMessages.add(new ErrorData(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage()));
-            }
         }
-        return null;
+
+        mainRepository.saveUser(user);
+        return gson.toJson(new Result(Collections.EMPTY_LIST, ResultStatus.SUCCESS));
     }
 }

@@ -19,10 +19,10 @@ import spock.lang.Specification
 @ContextConfiguration(classes = [MvcConfig], loader = AnnotationConfigWebContextLoader.class)
 @ActiveProfiles("dev")
 @WebAppConfiguration
-class LoanRepositoryTest extends Specification {
+class MainRepositoryTest extends Specification {
 
     @Autowired
-    private LoanRepository loanRepository
+    private MainRepository loanRepository
 
     @Transactional
     def "save loan in database"() {
@@ -45,7 +45,7 @@ class LoanRepositoryTest extends Specification {
 
     @Transactional
     def "get loans for user"() {
-        User user = new User(dateRegistered:  new DateTime(2013,10,19,10,0), mail: "artjom.kalita@gmail.com", password: "mypass")
+        User user = new User(dateRegistered:  new DateTime(2013,10,19,10,0), email: "artjom.kalita@gmail.com", password: "mypass")
 
         Loan firstLoan = new Loan(amount: Money.of(CurrencyUnit.EUR, 25.0),
                 currency: CurrencyUnit.EUR, interest: Money.of(CurrencyUnit.EUR, 2.0),

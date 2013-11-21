@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 @Repository
-@Transactional
-public class LoanRepositoryImpl implements LoanRepository {
+
+public class MainRepositoryImpl implements MainRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -50,6 +50,17 @@ public class LoanRepositoryImpl implements LoanRepository {
         Criteria criteria = currentSession.createCriteria(User.class);
         criteria.add(Restrictions.eq("id", userId));
         criteria.setFetchMode("loans", FetchMode.JOIN);
+        User user = (User) criteria.uniqueResult();
+
+        return user;
+    }
+
+    @Override
+    public User getUserByPhoneAndMail(String phone, String email) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Criteria criteria = currentSession.createCriteria(User.class);
+        criteria.add(Restrictions.eq("phone", phone));
+        criteria.add(Restrictions.eq("email", email));
         User user = (User) criteria.uniqueResult();
 
         return user;

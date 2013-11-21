@@ -6,7 +6,11 @@ import com.hazelcast.config.Config;
 import com.hazelcast.config.GroupConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import lv.testtask.gson.converter.CurrencyConverter;
 import lv.testtask.gson.converter.DateTimeConverter;
+import lv.testtask.gson.converter.MoneyConverter;
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.joda.time.DateTime;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +24,11 @@ public class AppConfig {
 
     @Bean
     public Gson gson(){
-        return new GsonBuilder().registerTypeAdapter(DateTime.class, new DateTimeConverter()).create();
+        return new GsonBuilder()
+                .registerTypeAdapter(DateTime.class, new DateTimeConverter())
+                .registerTypeAdapter(Money.class, new MoneyConverter())
+                .registerTypeAdapter(CurrencyUnit.class, new CurrencyConverter())
+                .create();
     }
 
     @Bean
@@ -45,5 +53,7 @@ public class AppConfig {
     public Validator validator(){
        return validatorFactory().getValidator();
     }
+
+
 
 }

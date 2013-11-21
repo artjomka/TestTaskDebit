@@ -1,15 +1,18 @@
 package lv.testtask.gson;
 
+import java.util.List;
+
 public class Result {
     private ResultStatus status;
-    private ErrorData data;
+    private List<ErrorData> errorData;
 
-    public ErrorData getData() {
-        return data;
+    public Result(List<ErrorData> errorData, ResultStatus status) {
+        this.errorData = errorData;
+        this.status = status;
     }
 
-    public void setData(ErrorData data) {
-        this.data = data;
+    public List<ErrorData> getErrorData() {
+        return errorData;
     }
 
     public ResultStatus getStatus() {
@@ -20,10 +23,14 @@ public class Result {
         this.status = status;
     }
 
+    public Boolean hasErrors(){
+        return errorData != null && !errorData.isEmpty();
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Result{");
-        sb.append("data=").append(data);
+        sb.append("errorData=").append(errorData);
         sb.append(", status=").append(status);
         sb.append('}');
         return sb.toString();

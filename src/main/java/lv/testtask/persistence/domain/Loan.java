@@ -48,7 +48,11 @@ public class Loan {
     @JoinColumn(name = "user_fk")
     private User user;
 
+    @NotNull
+    private Integer status;
 
 
-
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

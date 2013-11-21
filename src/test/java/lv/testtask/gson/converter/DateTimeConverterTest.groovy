@@ -24,9 +24,12 @@ class DateTimeConverterTest extends Specification {
         def deserializationContext = Mock(JsonDeserializationContext)
         def jsonElement = new JsonPrimitive("2013-11-18 10:00")
 
-        expect:
-        dateTimeConverter.deserialize(jsonElement, type, deserializationContext) == new DateTime(2013, 11, 18, 10, 0)
-
+        def datetime = dateTimeConverter.deserialize(jsonElement, type, deserializationContext)
+        when:
+        datetime
+        then:
+        datetime != null
+        datetime == new DateTime(2013, 11, 18, 10, 0)
     }
 
     def "Convert joda datetime to json element"() {
@@ -34,7 +37,12 @@ class DateTimeConverterTest extends Specification {
         def serializationContext = Mock(JsonSerializationContext)
         def datetime = new DateTime(2013, 11, 18, 10, 0)
 
-        expect:
-        dateTimeConverter.serialize(datetime,type,serializationContext) == new JsonPrimitive("2013-11-18 10:00")
+
+        def json = dateTimeConverter.serialize(datetime, type, serializationContext)
+        when:
+        json
+        then:
+        json != null
+        json == new JsonPrimitive("2013-11-18 10:00")
     }
 }

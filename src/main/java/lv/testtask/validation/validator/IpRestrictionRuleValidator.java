@@ -17,6 +17,6 @@ public class IpRestrictionRuleValidator implements ConstraintValidator<IpRestric
 
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {
-        return value < maxLoanAmountInDaytime;
+        return value <= maxLoanAmountInDaytime;
     }
 }
