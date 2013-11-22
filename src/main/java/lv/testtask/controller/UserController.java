@@ -29,7 +29,7 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/",method = RequestMethod.POST)
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     public ResponseEntity<String> registerUser(@RequestParam String userJson) {
         try {
             final String result = userService.registerUser(userJson);

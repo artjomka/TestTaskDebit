@@ -24,29 +24,26 @@ import java.util.Arrays;
 @RequestMapping("/loan")
 public class LoanController {
     private static final Logger LOG = LoggerFactory.getLogger(LoanController.class);
-
-
-
     @Autowired
     private LoanService loanService;
-
     @Autowired
     private Gson gson;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-	public  ResponseEntity<String>  printWelcome(ModelMap model) {
+    public ResponseEntity<String> printWelcome(ModelMap model) {
 
-		return new ResponseEntity<String>("Hello", HttpStatus.OK);
-	}
+        return new ResponseEntity<String>("Hello", HttpStatus.OK);
+    }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> takeLoan(@RequestParam String loanJson, @RequestParam HttpServletRequest request){
+    @RequestMapping(value = "/takeLoan", method = RequestMethod.POST)
+    public ResponseEntity<String> takeLoan(@RequestParam String loanJson, @RequestParam HttpServletRequest request) {
         String ip = request.getRemoteAddr();
         //TODO get user from session
-        return new ResponseEntity<String>( loanService.takeLoan(loanJson, ip, null), HttpStatus.OK);
+        return new ResponseEntity<String>(loanService.takeLoan(loanJson, ip, null), HttpStatus.OK);
     }
+
     @ExceptionHandler({Exception.class})
-    public String handleAll(Exception exception){
+    public String handleAll(Exception exception) {
         Result result = new Result(ResultStatus.ERROR, Arrays.asList(new ErrorData("global", exception.getMessage())));
         return gson.toJson(result);
     }
