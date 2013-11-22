@@ -28,9 +28,9 @@ public class ValidationHelper {
             for (ConstraintViolation<T> constraintViolation : constraintViolations) {
                 errorMessages.add(new ErrorData(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage()));
             }
-            return new Result(errorMessages, ResultStatus.ERROR);
+            return new Result(ResultStatus.ERROR, errorMessages);
         }
-        return new Result(Collections.EMPTY_LIST, ResultStatus.SUCCESS);
+        return new Result(ResultStatus.SUCCESS, Collections.EMPTY_LIST);
     }
 
     public IpRestrictionData getUpToDateIpRestriction(IpRestrictionData ipRestrictionData){

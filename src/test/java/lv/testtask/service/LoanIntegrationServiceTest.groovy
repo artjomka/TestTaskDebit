@@ -7,6 +7,7 @@ import lv.testtask.config.MvcConfig
 import lv.testtask.gson.converter.CurrencyConverter
 import lv.testtask.gson.converter.DateTimeConverter
 import lv.testtask.gson.converter.MoneyConverter
+import lv.testtask.persistence.domain.Loan
 import lv.testtask.persistence.domain.User
 import lv.testtask.repository.MainRepository
 import org.joda.money.CurrencyUnit
@@ -67,12 +68,41 @@ class LoanIntegrationServiceTest extends Specification {
         loan
         then:
         loan != null
-        loan.status == LoanStatus.ONGOING.getValue()
+        loan.status == LoanStatus.ONGOING
         loan.id != null
         loan.taken == new DateTime(2013,10,10,13,40)
         loan.returnTill == new DateTime(2013,12,10,8,52)
         loan.amount == Money.of(CurrencyUnit.EUR, 100.2)
         loan.interest == Money.of(CurrencyUnit.EUR, 10.1)
+
+    }
+
+    def "extend loan successfully "(){
+        def loan = new Loan(amount:  Money.of(CurrencyUnit.EUR, 100.0), interest: Money.of(CurrencyUnit.EUR, 10.0), taken: new DateTime(2013,10,10,13,40),
+                 returnTill: new DateTime(2013,12,10,13,40), status: LoanStatus.ONGOING, )
+
+        mainRepository.saveLoan(loan)
+
+        def result = loanService.extendLoan(loan, 10, 10.0)
+        when:
+        result
+        then:
+        result != null
+        result == "{\"status\":\"SUCCESS\",\"errorData\":[]}"
+
+        def extendedLoan = mainRepository.getLoanById(loan.id)
+        when:
+        extendedLoan
+        then:
+        extendedLoan != null
+        extendedLoan.returnTill == new DateTime(2013,12,20,13,40)
+        extendedLoan.loanExtensions != null
+        extendedLoan.loanExtensions.size() == 1
+        def loanExtension = extendedLoan.loanExtensions.getAt(0)
+        loanExtension != null
+        loanExtension.amount == Money.of(CurrencyUnit.EUR, 10.0)
+        loanExtension.daysProlonged == 10
+
 
     }
 

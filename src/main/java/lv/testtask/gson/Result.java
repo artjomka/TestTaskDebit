@@ -1,16 +1,22 @@
 package lv.testtask.gson;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Result {
-    private ResultStatus status;
-    private List<ErrorData> errorData;
+    private final ResultStatus status;
+    private final List<ErrorData> errorData;
 
-    public Result(List<ErrorData> errorData, ResultStatus status) {
-        this.errorData = errorData;
+    public Result(ResultStatus status, List<ErrorData> errorData) {
         this.status = status;
+        this.errorData = errorData;
     }
 
+    public Result (ResultStatus status) {
+        this.status = status;
+        this.errorData = Collections.EMPTY_LIST;
+
+    }
     public List<ErrorData> getErrorData() {
         return errorData;
     }
@@ -19,9 +25,6 @@ public class Result {
         return status;
     }
 
-    public void setStatus(ResultStatus status) {
-        this.status = status;
-    }
 
     public Boolean hasErrors(){
         return errorData != null && !errorData.isEmpty();

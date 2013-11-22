@@ -41,6 +41,6 @@ public class UserServiceImpl implements UserService {
         }
 
         mainRepository.saveUser(user);
-        return gson.toJson(new Result(Collections.EMPTY_LIST, ResultStatus.SUCCESS));
+        return gson.toJson(new Result(ResultStatus.SUCCESS, Collections.EMPTY_LIST));
     }
 }

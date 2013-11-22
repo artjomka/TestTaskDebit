@@ -17,10 +17,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
         webApplicationContext.register(MvcConfig.class);
         servletContext.addListener(new RequestContextListener());
+        servletContext.setInitParameter("spring.profiles.active","dev");
 
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(webApplicationContext));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/testtask/*");
+        dispatcher.addMapping("/");
 
 
     }

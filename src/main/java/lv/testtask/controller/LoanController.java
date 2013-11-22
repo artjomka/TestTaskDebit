@@ -33,10 +33,10 @@ public class LoanController {
     @Autowired
     private Gson gson;
 
-    @RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
-		model.addAttribute("message", "Hello world!");
-		return "hello";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+	public  ResponseEntity<String>  printWelcome(ModelMap model) {
+
+		return new ResponseEntity<String>("Hello", HttpStatus.OK);
 	}
 
     @RequestMapping(method = RequestMethod.POST)
@@ -47,7 +47,7 @@ public class LoanController {
     }
     @ExceptionHandler({Exception.class})
     public String handleAll(Exception exception){
-        Result result = new Result(Arrays.asList(new ErrorData("global", exception.getMessage())), ResultStatus.ERROR);
+        Result result = new Result(ResultStatus.ERROR, Arrays.asList(new ErrorData("global", exception.getMessage())));
         return gson.toJson(result);
     }
 }

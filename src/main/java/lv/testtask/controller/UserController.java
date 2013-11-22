@@ -29,7 +29,7 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/",method = RequestMethod.POST)
     public ResponseEntity<String> registerUser(@RequestParam String userJson) {
         try {
             final String result = userService.registerUser(userJson);
@@ -43,7 +43,7 @@ public class UserController {
 
     @ExceptionHandler({Exception.class})
     public String handleAll(Exception exception) {
-        Result result = new Result(Arrays.asList(new ErrorData("global", exception.getMessage())), ResultStatus.ERROR);
+        Result result = new Result(ResultStatus.ERROR, Arrays.asList(new ErrorData("global", exception.getMessage())));
         return gson.toJson(result);
     }
 }

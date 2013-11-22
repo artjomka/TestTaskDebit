@@ -40,7 +40,10 @@ public class SessionFactoryConfig {
     }
 
     private void hibernateProperties(Properties properties) {
-
+        properties.setProperty("hibernate.show_sql", String.valueOf(true));
+        properties.setProperty("hibernate.format_sql", String.valueOf(true));
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
     }
 
     @Bean

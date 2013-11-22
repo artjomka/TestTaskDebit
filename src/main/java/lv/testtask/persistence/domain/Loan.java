@@ -1,5 +1,6 @@
 package lv.testtask.persistence.domain;
 
+import lv.testtask.LoanStatus;
 import lv.testtask.validation.annotation.MidnightRule;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Parameter;
@@ -10,6 +11,7 @@ import org.joda.time.DateTime;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -42,20 +44,51 @@ public class Loan {
     private CurrencyUnit currency = CurrencyUnit.EUR;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "loan", cascade = CascadeType.ALL)
-    private Set<LoanExtension> loanExtensions;
+    private Set<LoanExtension> loanExtensions = new HashSet<LoanExtension>();
 
     @ManyToOne
     @JoinColumn(name = "user_fk")
     private User user;
 
-    private Integer status;
+
+    @Enumerated(EnumType.STRING)
+    private LoanStatus status;
 
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(LoanStatus status) {
         this.status = status;
+    }
+
+    public void addLoanExtension(LoanExtension loanExtension){
+        loanExtensions.add(loanExtension);
+    }
+
+    public void setReturnTill(DateTime returnTill) {
+        this.returnTill = returnTill;
+    }
+
+    public DateTime getReturnTill() {
+        return returnTill;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Loan loan = (Loan) o;
+
+        if (id != null ? !id.equals(loan.id) : loan.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

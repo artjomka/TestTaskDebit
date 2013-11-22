@@ -16,7 +16,7 @@ public final class EmbeddedJetty {
     private static final Logger LOGGER = LoggerFactory.getLogger(EmbeddedJetty.class);
 
 
-    public static final int PORT = 8088;
+    public static final int PORT = 8888;
     private Server jettyServer;
 
     public void startServer(){
@@ -56,6 +56,14 @@ public final class EmbeddedJetty {
             jettyServer.join();
         } catch (InterruptedException e) {
             LOGGER.error("Failed to start embedded server", e);
+        }
+    }
+
+    public void stop(){
+        try {
+            jettyServer.stop();
+        } catch (Exception e) {
+            LOGGER.error("Failed to stop embedded server", e);
         }
     }
 }
