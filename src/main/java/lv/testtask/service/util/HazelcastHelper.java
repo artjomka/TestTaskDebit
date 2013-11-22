@@ -3,6 +3,7 @@ package lv.testtask.service.util;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
+import com.hazelcast.config.GroupConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import lv.testtask.validation.IpRestrictionData;
@@ -16,7 +17,11 @@ public class HazelcastHelper {
     private HazelcastInstance getHazelcastClient() {
         ClientConfig clientConfig = new ClientConfig();
         clientConfig.addAddress("localhost");
-        return HazelcastClient.newHazelcastClient(clientConfig);
+        final GroupConfig groupConfig = new GroupConfig();
+        groupConfig.setName("name");
+        groupConfig.setPassword("myPassword");
+        clientConfig.setGroupConfig(groupConfig);
+        return  HazelcastClient.newHazelcastClient(clientConfig);
     }
 
     //TODO remove magic strings

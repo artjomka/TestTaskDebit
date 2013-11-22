@@ -60,4 +60,8 @@ public class IpRestrictionData implements DataSerializable {
             loansTakenToday = 0;
         }
     }
+
+    public void increaseLoanTaken() {
+        loansTakenToday =+ 1;
+    }
 }

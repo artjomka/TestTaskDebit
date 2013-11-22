@@ -2,6 +2,7 @@ package lv.testtask;
 
 import lv.testtask.config.MvcConfig;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -15,10 +16,12 @@ public class WebAppInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
         webApplicationContext.register(MvcConfig.class);
+        servletContext.addListener(new RequestContextListener());
 
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(webApplicationContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/testtask/*");
+
 
     }
 }

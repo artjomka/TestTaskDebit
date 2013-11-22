@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -35,7 +36,7 @@ public class User {
     private DateTime dateRegistered;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch =  FetchType.LAZY, orphanRemoval = true)
-    private Set<Loan> loans;
+    private Set<Loan> loans = new HashSet<Loan>();
 
     public String getPhone() {
         return phone;
@@ -109,5 +110,9 @@ public class User {
         sb.append(", loans=").append(loans);
         sb.append('}');
         return sb.toString();
+    }
+
+    public void addLoan(Loan loan) {
+        loans.add(loan);
     }
 }

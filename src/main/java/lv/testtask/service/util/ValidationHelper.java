@@ -3,6 +3,8 @@ package lv.testtask.service.util;
 import lv.testtask.gson.ErrorData;
 import lv.testtask.gson.Result;
 import lv.testtask.gson.ResultStatus;
+import lv.testtask.validation.IpRestrictionData;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,5 +31,17 @@ public class ValidationHelper {
             return new Result(errorMessages, ResultStatus.ERROR);
         }
         return new Result(Collections.EMPTY_LIST, ResultStatus.SUCCESS);
+    }
+
+    public IpRestrictionData getUpToDateIpRestriction(IpRestrictionData ipRestrictionData){
+        final DateTime now = DateTime.now();
+        if (checkIpRestrictionOutdated(ipRestrictionData, now)) {
+            return new IpRestrictionData(DateTime.now(), 0);
+        }
+        return  ipRestrictionData;
+    }
+
+    private boolean checkIpRestrictionOutdated(IpRestrictionData ipRestrictionData, DateTime now) {
+        return ipRestrictionData.getLastLoanTaken().isBefore(now.plusHours(24));
     }
 }

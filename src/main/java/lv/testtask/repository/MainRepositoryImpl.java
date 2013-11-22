@@ -20,7 +20,7 @@ public class MainRepositoryImpl implements MainRepository {
     @Override
     public void saveLoan(Loan loan) {
         Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.save(loan);
+        currentSession.saveOrUpdate(loan);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MainRepositoryImpl implements MainRepository {
     @Override
     public void saveUser(User user) {
         Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.save(user);
+        currentSession.saveOrUpdate(user);
 
     }
 
