@@ -44,7 +44,7 @@ class UserServiceTest extends Specification {
         userService.gson = gson
 
 
-        def userString = "{\"phone\":\"23232323\",\"email\":\"artjom.kalita@gmail.com\",\"password\":\"mypass\"}"
+        def userString = "{\"username\":\"23232323\",\"email\":\"artjom.kalita@gmail.com\",\"password\":\"mypass\"}"
         def result = userService.registerUser(userString)
         when:
         result
@@ -53,6 +53,8 @@ class UserServiceTest extends Specification {
         result != null
         result.contains("status")
         result.contains("SUCCESS")
+
+
 
     }
 

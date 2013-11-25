@@ -29,7 +29,7 @@ class JsonObjectConversion extends Specification {
     }
 
     def "Convert user object to JSON string"() {
-        def user = new User(dateRegistered: new DateTime(2013, 10, 10, 8, 52), id: 1, email: "artjom.kalita@gmail.com", phone: "23232323", password: "mypass")
+        def user = new User(dateRegistered: new DateTime(2013, 10, 10, 8, 52), id: 1, email: "artjom.kalita@gmail.com", username: "23232323", password: "mypass")
         user.loans = new HashSet<>()
         user.loans << new Loan(amount: Money.of(EUR, 13.2), interest: Money.of(EUR, 2.1), currency: EUR, id: 2, returnTill: new DateTime(2013, 10, 10, 8, 52), taken: new DateTime(2013, 10, 10, 8, 52))
 
@@ -38,12 +38,12 @@ class JsonObjectConversion extends Specification {
         json
         then:
         json != null
-        json == "{\"id\":1,\"phone\":\"23232323\",\"email\":\"artjom.kalita@gmail.com\",\"password\":\"mypass\",\"dateRegistered\":\"2013-10-10 08:52\",\"loans\":[{\"id\":2," +
+        json == "{\"id\":1,\"username\":\"23232323\",\"email\":\"artjom.kalita@gmail.com\",\"password\":\"mypass\",\"dateRegistered\":\"2013-10-10 08:52\",\"loans\":[{\"id\":2," +
                 "\"taken\":\"2013-10-10 08:52\",\"returnTill\":\"2013-10-10 08:52\",\"amount\":\"13.2\",\"interest\":\"2.1\",\"currency\":\"EUR\"}]}"
     }
 
     def "Convert Json to user object"() {
-        def json = "{\"id\":1,\"phone\":\"23232323\",\"email\":\"artjom.kalita@gmail.com\",\"password\":\"mypass\",\"dateRegistered\":\"2013-10-10 08:52\",\"loans\":[{\"id\":2," +
+        def json = "{\"id\":1,\"username\":\"23232323\",\"email\":\"artjom.kalita@gmail.com\",\"password\":\"mypass\",\"dateRegistered\":\"2013-10-10 08:52\",\"loans\":[{\"id\":2," +
                 "\"taken\":\"2013-10-10 08:52\",\"returnTill\":\"2013-10-10 08:52\",\"amount\":\"13.2\",\"interest\":\"2.1\",\"currency\":\"EUR\"}]}"
 
         def user = gson.fromJson(json, User.class)
@@ -54,7 +54,7 @@ class JsonObjectConversion extends Specification {
         user.id == 1
         user.dateRegistered == new DateTime(2013, 10, 10, 8, 52)
         user.email == "artjom.kalita@gmail.com"
-        user.phone == "23232323"
+        user.username == "23232323"
         user.password == "mypass"
 
         user.loans != null

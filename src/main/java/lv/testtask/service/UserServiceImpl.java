@@ -3,6 +3,7 @@ package lv.testtask.service;
 import com.google.gson.Gson;
 import lv.testtask.gson.Result;
 import lv.testtask.gson.ResultStatus;
+import lv.testtask.persistence.domain.Authorities;
 import lv.testtask.persistence.domain.User;
 import lv.testtask.repository.MainRepository;
 import lv.testtask.service.util.ValidationHelper;
@@ -41,6 +42,7 @@ public class UserServiceImpl implements UserService {
         }
 
         mainRepository.saveUser(user);
+        mainRepository.saveAuthorities(new Authorities(user.getUsername(),"USER"));
         return gson.toJson(new Result(ResultStatus.SUCCESS, Collections.EMPTY_LIST));
     }
 }

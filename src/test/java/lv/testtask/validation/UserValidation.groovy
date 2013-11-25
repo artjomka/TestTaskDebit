@@ -20,9 +20,9 @@ class UserValidation extends Specification {
     }
 
     def "User fields not emtpy validation"() {
-        def user = new User(id: 1, dateRegistered: DateTime.now(), password: "", phone: "", email: "")
+        def user = new User(id: 1, dateRegistered: DateTime.now(), password: "", username: "", email: "")
         def validationResult = validator.validate(user)
-        def expectedFields = ["email", "phone", "password"]
+        def expectedFields = ["email", "username", "password"]
         expect:
         validationResult != null
         validationResult.size() == 3
@@ -30,7 +30,7 @@ class UserValidation extends Specification {
     }
 
     def "Check user mail correctness" () {
-        def user = new User(id: 1, dateRegistered: DateTime.now(), password: "123", phone: "123", email: "aaaaa")
+        def user = new User(id: 1, dateRegistered: DateTime.now(), password: "123", username: "123", email: "aaaaa")
         def validationResult = validator.validate(user)
 
         expect:
@@ -40,7 +40,7 @@ class UserValidation extends Specification {
 
     }
     def "User correct data"() {
-        def user = new User(id: 1, dateRegistered: DateTime.now(), password: "pass", phone: "phone", email: "artjom.kalita@gmail.com")
+        def user = new User(id: 1, dateRegistered: DateTime.now(), password: "pass", username: "username", email: "artjom.kalita@gmail.com")
         def validationResult = validator.validate(user)
 
         expect:

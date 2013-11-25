@@ -33,17 +33,19 @@ public class UserController {
     public ResponseEntity<String> registerUser(@RequestParam String userJson) {
         try {
             final String result = userService.registerUser(userJson);
-            return new ResponseEntity<String>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
 
         } catch (Exception exception) {
             LOG.error("Exception during proccessing {}", userJson, exception);
         }
-        return new ResponseEntity<String>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ExceptionHandler({Exception.class})
-    public String handleAll(Exception exception) {
+    public ResponseEntity<String> handleAll(Exception exception) {
         Result result = new Result(ResultStatus.ERROR, Arrays.asList(new ErrorData("global", exception.getMessage())));
-        return gson.toJson(result);
+        return new ResponseEntity<String>(gson.toJson(result), HttpStatus.OK);
     }
+
+
 }

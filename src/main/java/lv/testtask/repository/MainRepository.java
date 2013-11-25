@@ -1,5 +1,6 @@
 package lv.testtask.repository;
 
+import lv.testtask.persistence.domain.Authorities;
 import lv.testtask.persistence.domain.Loan;
 import lv.testtask.persistence.domain.User;
 
@@ -17,5 +18,9 @@ public interface MainRepository {
 
     public User getUserById(Integer userId);
 
-    public User getUserByPhoneAndMail(String phone, String email);
+    public User getUserByUsernameAndMail(String phone, String email);
+
+    public void saveAuthorities(Authorities authorities);
+
+    public Authorities getAuthoritiesByUsername(String username);
 }

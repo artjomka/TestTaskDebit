@@ -46,7 +46,7 @@ class LoanIntegrationServiceTest extends Specification {
     }
 
     def "successfully take loan"() {
-        def user = new User(dateRegistered: DateTime.now(), email: "artjom.kalita@gmail.com", phone: "23232323", password: "mypass")
+        def user = new User(dateRegistered: DateTime.now(), email: "artjom.kalita@gmail.com", username: "23232323", password: "mypass")
         mainRepository.saveUser(user)
         def loanData = "{\"taken\":\"2013-10-10 13:40\",\"returnTill\":\"2013-12-10 08:52\",\"amount\":\"100.2\",\"interest\":\"10.1\",\"currency\":\"EUR\"}"
         def result = loanService.takeLoan(loanData, "127.0.0.1", user)
@@ -56,7 +56,7 @@ class LoanIntegrationServiceTest extends Specification {
         result != null
         result == "{\"status\":\"SUCCESS\",\"errorData\":[]}"
 
-        def userFromDb = mainRepository.getUserByPhoneAndMail("23232323", "artjom.kalita@gmail.com")
+        def userFromDb = mainRepository.getUserByUsernameAndMail("23232323", "artjom.kalita@gmail.com")
         when:
         userFromDb
         then:

@@ -1,12 +1,12 @@
 package lv.testtask.repository;
 
+import lv.testtask.persistence.domain.Authorities;
 import lv.testtask.persistence.domain.Loan;
 import lv.testtask.persistence.domain.User;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -56,13 +56,28 @@ public class MainRepositoryImpl implements MainRepository {
     }
 
     @Override
-    public User getUserByPhoneAndMail(String phone, String email) {
+    public User getUserByUsernameAndMail(String username, String email) {
         Session currentSession = sessionFactory.getCurrentSession();
         Criteria criteria = currentSession.createCriteria(User.class);
-        criteria.add(Restrictions.eq("phone", phone));
+        criteria.add(Restrictions.eq("username", username));
         criteria.add(Restrictions.eq("email", email));
         User user = (User) criteria.uniqueResult();
 
         return user;
+    }
+
+    @Override
+    public void saveAuthorities(Authorities authorities) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.save(authorities);
+
+    }
+
+    @Override
+    public Authorities getAuthoritiesByUsername(String username) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Criteria criteria = currentSession.createCriteria(Authorities.class);
+        criteria.add(Restrictions.eq("username", username));
+        return (Authorities) criteria.uniqueResult();
     }
 }

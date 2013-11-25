@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -32,19 +34,20 @@ public class LoanController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<String> printWelcome(ModelMap model) {
 
-        return new ResponseEntity<String>("Hello", HttpStatus.OK);
+        return new ResponseEntity<>("Hello", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/takeLoan", method = RequestMethod.POST)
-    public ResponseEntity<String> takeLoan(@RequestParam String loanJson, @RequestParam HttpServletRequest request) {
+    public ResponseEntity<String> takeLoan(@RequestParam String loanJson) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         String ip = request.getRemoteAddr();
         //TODO get user from session
-        return new ResponseEntity<String>(loanService.takeLoan(loanJson, ip, null), HttpStatus.OK);
+        return new ResponseEntity<>(loanService.takeLoan(loanJson, ip, null), HttpStatus.OK);
     }
 
     @ExceptionHandler({Exception.class})
-    public String handleAll(Exception exception) {
+    public ResponseEntity<String> handleAll(Exception exception) {
         Result result = new Result(ResultStatus.ERROR, Arrays.asList(new ErrorData("global", exception.getMessage())));
-        return gson.toJson(result);
+        return new ResponseEntity<>(gson.toJson(result), HttpStatus.OK);
     }
 }

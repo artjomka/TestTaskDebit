@@ -21,7 +21,7 @@ public class User {
     private Integer id;
 
     @NotEmpty
-    private String phone;
+    private String username;
 
     @NotEmpty
     @Email
@@ -30,6 +30,8 @@ public class User {
     @NotEmpty
     private String password;
 
+    @NotNull
+    private Boolean enabled = Boolean.TRUE;
 
     @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -38,12 +40,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch =  FetchType.LAZY, orphanRemoval = true)
     private Set<Loan> loans = new HashSet<Loan>();
 
-    public String getPhone() {
-        return phone;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -87,14 +89,14 @@ public class User {
         User user = (User) o;
 
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = phone != null ? phone.hashCode() : 0;
+        int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
@@ -103,7 +105,7 @@ public class User {
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
         sb.append("id=").append(id);
-        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", username='").append(username).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", dateRegistered=").append(dateRegistered);
